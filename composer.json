@@ -1,9 +1,9 @@
 {
     "name": "ebolution/laravel-logger",
     "description": "Base implementation of custom a logger",
-    "version": "1.0.0",
+    "version": "1.0.1",
     "minimum-stability": "stable",
-    "license": "proprietary",
+    "license": "MIT",
     "authors": [
         {
             "name": "Avanzed Cloud Develop, S.L.",
