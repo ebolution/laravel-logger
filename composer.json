@@ -1,7 +1,7 @@
 {
     "name": "ebolution/laravel-logger",
     "description": "Base implementation of custom a logger",
-    "version": "1.0.2",
+    "version": "1.0.3",
     "minimum-stability": "stable",
     "license": "MIT",
     "authors": [
@@ -10,9 +10,19 @@
             "email": "desarrollo@ebolution.com"
         }
     ],
+    "require": {
+        "ebolution/laravel-module-manager": "^1"
+    },
     "autoload": {
         "psr-4": {
             "Ebolution\\Logger\\": "src/"
+        }
+    },
+    "extra": {
+        "laravel": {
+            "providers": [
+                "Ebolution\\Logger\\Infrastructure\\ServicesProvider"
+            ]
         }
     }
 }
