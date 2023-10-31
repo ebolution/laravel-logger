@@ -8,19 +8,25 @@ use Ebolution\Logger\Domain\LoggerInterface;
 
 class Logger implements LoggerInterface
 {
-    public function __construct(
-        private BuilderInterface $builder
-    ) {}
+    protected array $channels;
 
-    public function __invoke(string $message, string $level = 'info'): void
-    {
+    public function __construct(
+        private readonly BuilderInterface $builder
+    ) {
         $channel = Log::build([
             'driver' => $this->builder->getDriver(),
             'path' => $this->builder->getPath(),
         ]);
 
+        $this->channels = array_merge(
+            config('ebolution-laravel-nutt.logging.channels.default', []),
+            [$channel]);
+    }
+
+    public function __invoke(string $message, string $level = 'info'): void
+    {
         $prefix = $this->builder->getPrefix();
         $message = ($prefix ? '[' . $prefix . '] ' : '') . $message;
-        Log::stack(['slack', $channel])->{$level}($message);
+        Log::stack($this->channels)->{$level}($message);
     }
 }
